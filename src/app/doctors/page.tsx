@@ -18,6 +18,14 @@ export default async function DoctorsPage() {
             doctors.map((user: any) => (
                 <div key={user.id} className="p-10">
                   <p>{user.name}</p>
+                  <p className="mt-5">Slots Below</p>
+                  {
+                    user.monday.map((item: any) => (
+                        <div key={item.id}>
+                          <p>{item.slot}</p>
+                        </div>
+                    ))
+                  }
                 </div>
             ))
         }
