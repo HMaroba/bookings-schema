@@ -16,32 +16,38 @@ datasource db {
 model Doctor {
   id      Int       @id @default(autoincrement())
   name    String?
-  email   String @unique
+  email   String    @unique
   monday  Monday[]
   friday  Friday[]
   tuesday Tuesday[]
 }
 
 model Monday {
-  id       Int      @id @default(autoincrement())
-  slot     String[]
-  date     DateTime
-  doctor   Doctor   @relation(fields: [doctorId], references: [id])
-  doctorId Int
+  id        Int       @id @default(autoincrement())
+  slot      String[]
+  date      DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  doctor    Doctor    @relation(fields: [doctorId], references: [id])
+  doctorId  Int
 }
 
 model Tuesday {
-  id       Int      @id @default(autoincrement())
-  slot     String[]
-  date     DateTime
-  doctor   Doctor   @relation(fields: [doctorId], references: [id])
-  doctorId Int
+  id        Int       @id @default(autoincrement())
+  slot      String[]
+  date      DateTime?
+  doctor    Doctor    @relation(fields: [doctorId], references: [id])
+  doctorId  Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 model Friday {
-  id       Int      @id @default(autoincrement())
-  slot     String[]
-  date     DateTime
-  doctor   Doctor   @relation(fields: [doctorId], references: [id])
-  doctorId Int
+  id        Int       @id @default(autoincrement())
+  slot      String[]
+  date      DateTime?
+  doctor    Doctor    @relation(fields: [doctorId], references: [id])
+  doctorId  Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 }
