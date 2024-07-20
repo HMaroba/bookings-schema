@@ -1,11 +1,32 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 
-export async function POST(request : NextRequest) {
-    try {
-        const {name } = request.json();
-        
-    } catch (error) {
-        
-    }
+export async function POST(request: NextRequest) {
+  try {
+    const { name, email } = request.json();
+
+    const emailExists = await prisma.doctor.findFirst({
+      where: email,
+    });
+
+    const response = await prisma.doctor.create({
+      data: {
+        name,
+        email,
+      },
+    });
+
+    return NextResponse.json({
+      message: "User created",
+      status: 201,
+      details: response,
+    });
+  } catch (error) {
+    return NextResponse.json({
+      status: 500,
+      message: "Server error",
+    });
+  }
 }
