@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-
 const prisma = new PrismaClient();
+
+type Props = {
+  name: string;
+  email: string;
+};
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email } = request.json();
+
+    await prisma.$connect();
+    const { name, email }  = request.json();
 
     const emailExists = await prisma.doctor.findFirst({
       where: email,
