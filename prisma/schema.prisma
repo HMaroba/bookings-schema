@@ -13,3 +13,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Doctor {
+  id      Int       @id @default(autoincrement())
+  name    String?
+  monday  Monday[]
+  friday  Friday[]
+  tuesday Tuesday[]
+}
+
+model Monday {
+  id       Int      @id @default(autoincrement())
+  slot     String[]
+  date     DateTime
+  doctor   Doctor   @relation(fields: [doctorId], references: [id])
+  doctorId Int
+}
+
+model Tuesday {
+  id       Int      @id @default(autoincrement())
+  slot     String[]
+  date     DateTime
+  doctor   Doctor   @relation(fields: [doctorId], references: [id])
+  doctorId Int
+}
+
+model Friday {
+  id       Int      @id @default(autoincrement())
+  slot     String[]
+  date     DateTime
+  doctor   Doctor   @relation(fields: [doctorId], references: [id])
+  doctorId Int
+}
