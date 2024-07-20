@@ -47,7 +47,7 @@ model Friday {
   slot      String[]
   date      DateTime?
   doctor    Doctor    @relation(fields: [doctorId], references: [id])
-  doctorId  Int
+  doctorId  Int 
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 }

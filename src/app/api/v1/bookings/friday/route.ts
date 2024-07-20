@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     await prisma.$connect();
     const { slot, doctorId } = await request.json();
 
-    const response = await prisma.monday.create({
+    const response = await prisma.friday.create({
       data: {
         slot,
         doctorId,
